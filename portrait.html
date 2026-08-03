@@ -87,13 +87,13 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
     display:inline-flex; align-items:center; justify-content:center;
     height:56px; flex-shrink:0; padding:0 36px;
     border:2px solid var(--red); border-radius:999px;
-    color:var(--red); font-weight:800; font-size:22px;
+    color:var(--red); font-weight:800; font-size:26px;
     letter-spacing:.12em; text-transform:uppercase;
 }
 .s1l{ display:inline-flex; align-items:flex-start; position:relative; line-height:1; }
 .s1l .word{ font-weight:800; letter-spacing:-.01em; }
 
-.body{ color:var(--grey); font-size:27px; line-height:1.55; font-weight:400; }
+.body{ color:var(--grey); font-size:46px; line-height:1.45; font-weight:400; }
 .body.on-dark{ color:rgba(255,255,255,.82); }
 .body strong,.body b{ color:inherit; font-weight:800; }
 .lead-red{ color:var(--red); font-weight:800; }
@@ -116,15 +116,15 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 /* ============================================================
    SLIDE 2 — WILLKOMMEN  (navy header / white body / photo foot)
    ============================================================ */
-.p-welcome{ display:grid; grid-template-rows:600px 940px 380px; }
+.p-welcome{ display:grid; grid-template-rows:580px 960px 380px; }
 .p-welcome .col-navy{ background:var(--navy); padding:96px 80px 0; display:flex; flex-direction:column; justify-content:center; }
 .p-welcome .col-navy h2{ color:#fff; font-size:92px; line-height:1.0; text-transform:uppercase; }
 .p-welcome .col-navy h2 .red{ color:var(--red); }
-.p-welcome .tags{ margin-top:40px; color:#fff; font-size:29px; font-weight:400; letter-spacing:.01em; }
+.p-welcome .tags{ margin-top:40px; color:#fff; font-size:40px; font-weight:400; letter-spacing:.01em; }
 .p-welcome .tags .sep{ color:var(--red); margin:0 14px; }
 .p-welcome .col-white{ background:#fff; padding:90px 80px; display:flex; flex-direction:column; justify-content:center; }
 .p-welcome .col-white .pill{ margin-bottom:34px; align-self:flex-start; }
-.p-welcome .col-white h3{ font-size:66px; line-height:1.04; text-transform:uppercase; color:var(--ink); }
+.p-welcome .col-white h3{ font-size:72px; line-height:1.04; text-transform:uppercase; color:var(--ink); }
 .p-welcome .col-white h3 .red{ color:var(--red); }
 .p-welcome .col-white .body{ margin-top:34px; }
 .p-welcome .col-white .body + .body{ margin-top:24px; }
@@ -134,30 +134,30 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 /* ============================================================
    SLIDE 3 — DAS STUDIO  (photo / red features / marx+standort)
    ============================================================ */
-.p-studio{ display:grid; grid-template-rows:700px 780px 440px; }
+.p-studio{ display:grid; grid-template-rows:580px 960px 380px; }
 .p-studio .col-photo{ position:relative; background:url('assets/studio-walk.jpg') center/cover no-repeat; }
 .p-studio .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.92) 6%, rgba(6,12,26,.15) 55%, rgba(6,12,26,.35)); }
 .p-studio .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
 .p-studio .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:74px; }
 .p-studio .col-photo h2{ color:#fff; font-size:76px; line-height:1.0; text-transform:uppercase; }
-.p-studio .col-photo .kick{ color:var(--red); font-size:30px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-top:22px; }
+.p-studio .col-photo .kick{ color:var(--red); font-size:42px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-top:22px; }
 .p-studio .col-red{ background:var(--panel-grad); padding:70px 80px; color:#fff; display:flex; flex-direction:column; }
 .p-studio .feat-row{ display:flex; gap:34px; margin-bottom:44px; }
 .p-studio .feat{ flex:1; }
 .p-studio .feat img{ height:64px; width:auto; display:block; margin-bottom:20px; }
-.p-studio .feat .fl{ font-size:29px; font-weight:800; line-height:1.15; }
+.p-studio .feat .fl{ font-size:40px; font-weight:800; line-height:1.15; }
 .p-studio .feat-div{ width:2px; align-self:stretch; background:rgba(255,255,255,.4); }
-.p-studio .col-red h3{ font-size:52px; line-height:1.05; text-transform:uppercase; }
-.p-studio .col-red .body{ color:rgba(255,255,255,.9); font-size:25px; margin-top:24px; }
+.p-studio .col-red h3{ font-size:60px; line-height:1.05; text-transform:uppercase; }
+.p-studio .col-red .body{ color:rgba(255,255,255,.9); font-size:46px; margin-top:24px; }
 .p-studio .col-marx{ position:relative; background:url('assets/media-quarter-marx.jpg') center/cover no-repeat; }
 .p-studio .col-marx .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.5), rgba(6,12,26,.05) 70%); }
-.p-studio .standort{ position:absolute; left:80px; right:80px; top:56px; bottom:56px; background:#fff; border-radius:22px; padding:34px 40px; box-shadow:0 24px 60px rgba(0,0,0,.35); display:flex; flex-direction:column; justify-content:center; }
+.p-studio .standort{ position:absolute; left:80px; right:80px; top:40px; bottom:40px; background:#fff; border-radius:22px; padding:34px 40px; box-shadow:0 24px 60px rgba(0,0,0,.35); display:flex; flex-direction:column; justify-content:center; }
 .p-studio .standort .head{ display:flex; align-items:center; gap:16px; margin-bottom:18px; }
 .p-studio .standort .head svg{ height:44px; color:var(--red); }
-.p-studio .standort .head .t{ font-size:26px; font-weight:800; }
-.p-studio .standort .head .t b{ color:var(--red); display:block; font-size:30px; }
+.p-studio .standort .head .t{ font-size:38px; font-weight:800; }
+.p-studio .standort .head .t b{ color:var(--red); display:block; font-size:44px; }
 .p-studio .standort ul{ list-style:none; }
-.p-studio .standort li{ position:relative; padding-left:26px; font-size:25px; color:var(--grey); margin-top:9px; }
+.p-studio .standort li{ position:relative; padding-left:26px; font-size:42px; color:var(--grey); margin-top:9px; }
 .p-studio .standort li::before{ content:''; position:absolute; left:0; top:12px; width:10px; height:10px; border-radius:50%; background:var(--red); }
 
 /* ============================================================
@@ -169,29 +169,32 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 .p-facts .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
 .p-facts .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:80px; text-shadow:0 2px 18px rgba(0,0,0,.75); }
 .p-facts .col-photo h2{ color:#fff; font-size:92px; line-height:0.98; text-transform:uppercase; }
-.p-facts .col-photo .kick{ color:var(--red); font-size:34px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:24px; line-height:1.2; }
+.p-facts .col-photo .kick{ color:var(--red); font-size:46px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:24px; line-height:1.2; }
 .p-facts .col-stats{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; gap:48px; }
 .p-facts .stat .icn{ height:60px; width:auto; margin-bottom:26px; display:block; }
-.p-facts .stat .lbl{ color:#fff; font-size:28px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+.p-facts .stat .lbl{ color:#fff; font-size:42px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
 .p-facts .stat .num{ color:#fff; font-size:190px; font-weight:900; line-height:0.9; letter-spacing:-.03em; margin:6px 0; }
 .p-facts .stat .num .cval{ display:inline-block; text-align:right; font-variant-numeric:tabular-nums; }
 .p-facts .stat .num .unit{ font-size:72px; vertical-align:top; margin-left:10px; }
-.p-facts .stat .cap{ color:rgba(255,255,255,.92); font-size:27px; line-height:1.4; max-width:820px; }
+.p-facts .stat .cap{ color:rgba(255,255,255,.92); font-size:46px; line-height:1.4; max-width:820px; }
 .p-facts .divide{ height:2px; background:rgba(255,255,255,.3); }
 
 /* ============================================================
    SLIDE 5 — VORTEILE  (red bg, 3 horizontal white cards)
    ============================================================ */
-.p-benefits{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; }
-.p-benefits .pill{ border-color:#fff; color:#fff; background:none; align-self:flex-start; margin-bottom:38px; }
-.p-benefits h2{ color:#fff; font-size:72px; text-transform:uppercase; line-height:1.0; }
-.p-benefits .intro{ color:rgba(255,255,255,.9); font-size:26px; line-height:1.5; margin-top:22px; }
-.p-benefits .cards{ display:flex; flex-direction:column; gap:28px; margin-top:44px; }
-.pbcard{ background:#fff; border-radius:26px; padding:38px 40px; display:flex; align-items:flex-start; gap:36px; }
-.pbcard .ic{ height:88px; width:96px; flex-shrink:0; color:var(--red); }
-.pbcard .txt h3{ color:var(--ink); font-size:38px; line-height:1.05; }
-.pbcard .txt .st{ color:var(--red); font-size:22px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; margin:12px 0 12px; line-height:1.25; }
-.pbcard .txt p{ color:var(--grey); font-size:24px; line-height:1.5; }
+/* SLIDE 5a — statement (pill + headline + intro), vertically centred */
+.p-benefits{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-benefits .pill{ border-color:#fff; color:#fff; background:none; align-self:flex-start; margin-bottom:44px; }
+.p-benefits h2{ color:#fff; font-size:82px; text-transform:uppercase; line-height:1.0; }
+.p-benefits .intro{ color:rgba(255,255,255,.9); font-size:46px; line-height:1.5; margin-top:34px; }
+/* SLIDE 5b — the three benefit cards, vertically centred */
+.p-benefits2{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-benefits2 .cards{ display:flex; flex-direction:column; gap:20px; flex-shrink:0; }
+.pbcard{ background:#fff; border-radius:26px; padding:26px 38px; display:flex; align-items:flex-start; gap:36px; }
+.pbcard .ic{ height:112px; width:120px; flex-shrink:0; color:var(--red); }
+.pbcard .txt h3{ color:var(--ink); font-size:54px; line-height:1.05; }
+.pbcard .txt .st{ color:var(--red); font-size:40px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; margin:12px 0 12px; line-height:1.25; }
+.pbcard .txt p{ color:var(--grey); font-size:46px; line-height:1.5; }
 
 /* ============================================================
    SLIDE 6 — TECHNIK INTRO  (photo / text)
@@ -202,14 +205,14 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 .p-tech .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
 .p-tech .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:74px; }
 .p-tech .col-photo h2{ color:#fff; font-size:100px; text-transform:uppercase; line-height:0.98; }
-.p-tech .col-photo .kick{ color:var(--red); font-size:36px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:22px; }
+.p-tech .col-photo .kick{ color:var(--red); font-size:46px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:22px; }
 .p-tech .col-text{ background:#fff; padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
-.p-tech .col-text .eyebrow{ color:var(--red); font-size:24px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:26px; }
+.p-tech .col-text .eyebrow{ color:var(--red); font-size:40px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:26px; }
 .p-tech .col-text h3{ font-size:70px; text-transform:uppercase; line-height:1.02; color:var(--ink); }
 .p-tech .col-text h3 .red{ color:var(--red); }
-.p-tech .col-text .body{ margin-top:36px; font-size:30px; }
+.p-tech .col-text .body{ margin-top:36px; font-size:46px; }
 .p-tech .chips{ display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:44px; }
-.p-tech .chip{ border:2px solid var(--line); border-radius:14px; padding:18px 26px; font-size:24px; font-weight:700; color:var(--navy); }
+.p-tech .chip{ border:2px solid var(--line); border-radius:14px; padding:18px 26px; font-size:40px; font-weight:700; color:var(--navy); }
 .p-tech .chip b{ color:var(--red); }
 
 /* ============================================================
@@ -218,74 +221,74 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 .p-diff{ background:var(--panel-grad); padding:76px 70px; display:flex; flex-direction:column; }
 .p-diff .pill{ border-color:#fff; color:#fff; background:none; align-self:flex-start; margin-bottom:40px; }
 .p-diff h2{ color:#fff; font-size:70px; text-transform:uppercase; margin-bottom:40px; }
-.p-diff .table{ background:#fff; border-radius:26px; overflow:hidden; flex:1; display:flex; flex-direction:column; }
-.pdrow{ display:grid; grid-template-columns:230px 1fr; align-items:stretch; flex:1; }
+.p-diff .table{ background:#fff; border-radius:26px; overflow:hidden; display:flex; flex-direction:column; }
+.pdrow{ display:grid; grid-template-columns:290px 1fr; align-items:stretch; }
 .pdrow .lead{ background:var(--red); color:#fff; padding:36px 32px; display:flex; flex-direction:column; justify-content:center; }
 .pdrow .lead .no{ color:#fff; font-size:52px; font-weight:900; line-height:1; }
-.pdrow .lead .nm{ color:#fff; font-size:36px; font-weight:900; margin-top:8px; letter-spacing:-.01em; }
+.pdrow .lead .nm{ color:#fff; font-size:37px; font-weight:900; margin-top:8px; letter-spacing:-.02em; }
 .pdrow .rt{ padding:32px 44px; border-top:2px solid rgba(220,26,49,.22); display:flex; flex-direction:column; justify-content:center; }
 .pdrow:first-child .rt{ border-top:none; }
-.pdrow .cap{ color:var(--red); font-size:24px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.pdrow .cap{ color:var(--red); font-size:44px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
 .pdrow .cols{ display:grid; grid-template-columns:1fr 1fr; gap:18px 40px; }
-.pdrow .cols .grp .h{ color:var(--ink); font-size:22px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px; }
+.pdrow .cols .grp .h{ color:var(--ink); font-size:38px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px; }
 .pdrow ul{ list-style:none; }
-.pdrow li{ position:relative; padding-left:24px; font-size:23px; color:var(--grey); line-height:1.35; margin-top:8px; }
+.pdrow li{ position:relative; padding-left:24px; font-size:42px; color:var(--grey); line-height:1.35; margin-top:8px; }
 .pdrow li:first-child{ margin-top:0; }
 .pdrow li::before{ content:''; position:absolute; left:0; top:11px; width:9px; height:9px; border-radius:50%; background:var(--red); }
 
 /* ============================================================
    SLIDE 8 — SERVICE & LEISTUNGEN  (photo / pricing)
    ============================================================ */
-.p-service{ display:grid; grid-template-rows:560px 1360px; }
+.p-service{ display:grid; grid-template-rows:520px 1400px; }
 .p-service .col-photo{ position:relative; background:url('assets/makeup.jpg') center 30%/cover no-repeat; }
 .p-service .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.7), rgba(6,12,26,.05) 60%); }
 .p-service .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
 .p-service .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:66px; }
 .p-service .col-photo h2{ color:#fff; font-size:74px; text-transform:uppercase; line-height:1.0; }
-.p-service .col-buy{ background:#fff; padding:70px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-service .col-buy{ background:#fff; padding:40px 80px; display:flex; flex-direction:column; justify-content:center; }
 .p-service .col-buy .pill{ margin-bottom:26px; align-self:flex-start; }
 .p-service .col-buy h3{ font-size:52px; text-transform:uppercase; color:var(--ink); }
-.p-service .col-buy .subline{ color:var(--grey); font-size:28px; margin-top:12px; margin-bottom:40px; }
+.p-service .col-buy .subline{ color:var(--grey); font-size:46px; margin-top:12px; margin-bottom:40px; }
 .p-service .plans{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
 .pplan{ border:2px solid var(--line); border-radius:22px; padding:34px 32px; }
-.pplan h4{ color:var(--red); font-size:27px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.pplan h4{ color:var(--red); font-size:40px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
 .pplan .price{ font-size:56px; font-weight:900; color:var(--ink); line-height:1; }
-.pplan .price small{ display:block; font-size:21px; color:var(--grey); font-weight:600; margin-top:8px; }
-.pplan .incl{ font-size:22px; color:var(--grey); margin-top:16px; line-height:1.4; }
+.pplan .price small{ display:block; font-size:36px; color:var(--grey); font-weight:600; margin-top:8px; }
+.pplan .incl{ font-size:40px; color:var(--grey); margin-top:16px; line-height:1.4; }
 .pplan .divh{ height:1px; background:var(--line); margin:22px 0; }
-.pplan .ideal{ font-size:20px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px; }
+.pplan .ideal{ font-size:36px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px; }
 .pplan ul{ list-style:none; }
-.pplan li{ position:relative; padding-left:24px; font-size:22px; color:var(--grey); margin-top:10px; line-height:1.3; }
+.pplan li{ position:relative; padding-left:24px; font-size:40px; color:var(--grey); margin-top:10px; line-height:1.3; }
 .pplan li::before{ content:''; position:absolute; left:0; top:10px; width:8px; height:8px; border-radius:50%; background:var(--red); }
-.pplan .poa{ color:var(--red); font-weight:800; font-size:23px; margin-top:20px; }
-.p-service .note{ font-size:23px; color:var(--grey); line-height:1.5; margin-top:32px; }
+.pplan .poa{ color:var(--red); font-weight:800; font-size:40px; margin-top:20px; }
+.p-service .note{ font-size:38px; color:var(--grey); line-height:1.45; margin-top:20px; }
 .p-service .note b{ color:var(--ink); font-weight:800; }
 
 /* ============================================================
    SLIDE 9 — USE CASE 1  (photo / navy text)
    ============================================================ */
-.p-uc1{ display:grid; grid-template-rows:720px 1200px; background:var(--navy); }
+.p-uc1{ display:grid; grid-template-rows:700px 1220px; background:var(--navy); }
 .p-uc1 .photo-col{ position:relative; background:url('assets/usecase1-audience.jpg') center/cover no-repeat; }
 .p-uc1 .photo-col::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,31,59,.55) 4%, rgba(6,12,26,0) 40%); }
 .p-uc1 .text-col{ background:var(--navy); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
 .p-uc1 .text-col .pill{ align-self:flex-start; background:var(--navy); margin-bottom:30px; }
 .p-uc1 .text-col h2{ color:#fff; font-size:82px; text-transform:uppercase; line-height:1.0; }
-.p-uc1 .text-col .uc{ color:var(--red); font-size:26px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:18px 0 26px; }
-.p-uc1 .text-col .body{ color:rgba(255,255,255,.85); font-size:27px; line-height:1.5; }
+.p-uc1 .text-col .uc{ color:var(--red); font-size:40px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:18px 0 26px; }
+.p-uc1 .text-col .body{ color:rgba(255,255,255,.85); font-size:46px; line-height:1.5; }
 .p-uc1 .text-col .body b{ color:#fff; }
 .p-uc1 .text-col .divider{ height:2px; background:rgba(255,255,255,.16); margin:36px 0; }
-.p-uc1 .text-col h3{ color:#fff; font-size:46px; text-transform:uppercase; line-height:1.05; margin-bottom:18px; }
+.p-uc1 .text-col h3{ color:#fff; font-size:56px; text-transform:uppercase; line-height:1.05; margin-bottom:18px; }
 .p-uc1 .text-col h3 .red{ color:var(--red); }
 
 /* ============================================================
    SLIDE 10 — USE CASE 2  (navy text / photo collage)
    ============================================================ */
-.p-uc2{ display:grid; grid-template-rows:700px 1220px; background:var(--navy); }
-.p-uc2 .text-col{ padding:96px 80px 0; display:flex; flex-direction:column; justify-content:center; }
+.p-uc2{ display:grid; grid-template-rows:980px 940px; background:var(--navy); }
+.p-uc2 .text-col{ padding:64px 80px 0; display:flex; flex-direction:column; justify-content:center; }
 .p-uc2 .text-col .pill{ align-self:flex-start; background:var(--navy); margin-bottom:30px; }
 .p-uc2 .text-col h2{ color:#fff; font-size:84px; text-transform:uppercase; line-height:1.0; }
-.p-uc2 .text-col .uc{ color:var(--red); font-size:26px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:20px 0 26px; }
-.p-uc2 .text-col .body{ color:rgba(255,255,255,.85); font-size:27px; line-height:1.5; }
+.p-uc2 .text-col .uc{ color:var(--red); font-size:40px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:20px 0 26px; }
+.p-uc2 .text-col .body{ color:rgba(255,255,255,.85); font-size:46px; line-height:1.5; }
 .p-uc2 .photos{ position:relative; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1.35fr 1fr; gap:18px; padding:40px 80px 80px; }
 .p-uc2 .photos .im{ background-size:cover; background-position:center; border-radius:16px; }
 .p-uc2 .photos .big{ grid-column:1 / -1; background-image:url('assets/usecase2-main.jpg'); }
@@ -302,14 +305,14 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 .p-contact .col-info{ background:#fff; padding:76px 80px; display:flex; flex-direction:column; justify-content:center; position:relative; }
 .p-contact .col-info .pill{ margin-bottom:30px; align-self:flex-start; }
 .p-contact .col-info h3{ font-size:80px; text-transform:uppercase; color:var(--ink); }
-.p-contact .col-info .red-sub{ color:var(--red); font-size:38px; font-weight:900; text-transform:uppercase; margin-top:12px; }
+.p-contact .col-info .red-sub{ color:var(--red); font-size:46px; font-weight:900; text-transform:uppercase; margin-top:12px; }
 .p-contact .col-info .body{ margin-top:32px; }
 .p-contact .contact-card{ border:2px solid var(--red); border-radius:24px; padding:40px 44px; margin-top:44px; }
-.p-contact .contact-card .h{ font-size:27px; font-weight:900; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); margin-bottom:28px; }
+.p-contact .contact-card .h{ font-size:40px; font-weight:900; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); margin-bottom:28px; }
 .p-contact .contact-card .people{ display:grid; grid-template-columns:1fr 1fr; gap:24px 40px; }
-.p-contact .contact-card .nm{ color:var(--red); font-size:29px; font-weight:900; letter-spacing:.02em; }
-.p-contact .contact-card .ph{ color:var(--grey); font-size:25px; }
-.p-contact .contact-card .mail{ grid-column:1 / -1; display:flex; align-items:center; gap:14px; color:var(--grey); font-size:25px; margin-top:8px; }
+.p-contact .contact-card .nm{ color:var(--red); font-size:44px; font-weight:900; letter-spacing:.02em; }
+.p-contact .contact-card .ph{ color:var(--grey); font-size:42px; }
+.p-contact .contact-card .mail{ grid-column:1 / -1; display:flex; align-items:center; gap:14px; color:var(--grey); font-size:42px; margin-top:8px; }
 .p-contact .contact-card .mail svg,.p-contact .contact-card .nm-row svg{ height:27px; color:var(--red); }
 .p-contact .contact-card .nm-row{ display:flex; align-items:center; gap:12px; margin-top:8px; }
 
@@ -323,8 +326,8 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
 .p-end .menu{ position:absolute; left:80px; right:80px; top:1200px; display:grid; grid-template-columns:1fr 1fr; gap:0 40px; }
 .p-end .menu div{ color:#fff; font-size:40px; font-weight:500; letter-spacing:.12em; padding:20px 0; border-top:1px solid rgba(255,255,255,.25); }
 .p-end .addr{ position:absolute; left:80px; bottom:90px; }
-.p-end .addr .co{ color:var(--red); font-size:28px; font-weight:700; letter-spacing:.06em; }
-.p-end .addr .ln{ color:rgba(255,255,255,.55); font-size:25px; font-weight:400; letter-spacing:.06em; margin-top:12px; }
+.p-end .addr .co{ color:var(--red); font-size:40px; font-weight:700; letter-spacing:.06em; }
+.p-end .addr .ln{ color:rgba(255,255,255,.55); font-size:40px; font-weight:400; letter-spacing:.06em; margin-top:12px; }
 
 /* ============================================================
    DECK CHROME — progress bar + slide counter
@@ -457,6 +460,10 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
       <span class="pill reveal d1">Vorteile im Überblick</span>
       <h2 class="reveal d1">Mitten in einer Kulisse,<br>in der Geschichten entstehen.</h2>
       <p class="intro reveal d2">In Studio 1 Live veranstaltest du nicht „irgendein Event“ – du stehst mitten in einer Kulisse, in der sonst Geschichten entstehen, Kameras laufen und Ideen groß gedacht werden. Ob Launch, Talk, Vortrag, Keynote, Townhall, Panel oder Networking-Format: dieses Fernsehstudio verwandelt jedes Event in eine Inszenierung.</p>
+    </section>
+
+    <!-- ========================= SLIDE 5b — VORTEILE (Cards) ========================= -->
+    <section class="slide p-benefits2">
       <div class="cards">
         <div class="pbcard reveal d2">
           <svg class="ic" viewBox="0 0 45.18 65.06" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M34.89,32.87s-.04,0-.06,0l-9.99-.91c-.28-.03-.51-.22-.59-.49l-2.46-9.1-6.15-2.35c-8.04-2.6-7.86-6.8-7.41-8.48,0,0,0-.02.01-.04l1.62-4.9s.01-.04.03-.07c2.25-4.97,9.09-2.4,11.4-1.52l5.09,1.16L31.97.21c.17-.18.43-.26.67-.19l9.18,2.64c.23.07.41.25.47.49.05.23-.02.48-.2.64l-5.54,5.17,8.02.88c.19.02.36.12.48.28.11.16.15.36.1.54l-3.97,15.99c-.05.18-.17.34-.34.43-.17.09-.37.1-.54.04l-7.92-2.93,3.12,7.73c.09.22.06.46-.08.65-.13.17-.33.27-.54.27M25.42,30.67l8.43.77-3.28-8.11c-.1-.25-.04-.53.14-.72.18-.19.46-.25.71-.16l8.64,3.19,3.6-14.52-8.71-.96c-.26-.03-.48-.21-.56-.45-.08-.25-.01-.52.18-.7l5.74-5.36-7.65-2.2-5.57,5.94c-.16.17-.4.25-.64.19l-5.51-1.26s-.06-.02-.09-.03c-7.92-3.02-9.29-.21-9.73.77l-1.61,4.85c-.73,2.77,1.66,5.27,6.55,6.85.01,0,.02,0,.03.01l6.48,2.47c.2.08.35.24.41.45l2.43,8.98Z"/><path d="M27.8,20.82c-.14,0-.28-.02-.42-.05-.9-.2-1.57-1.01-1.89-2.27-.28-1.1-.26-2.47.04-3.85.69-3.1,2.52-5.14,4.25-4.76.9.2,1.57,1,1.89,2.27.28,1.1.26,2.47-.05,3.84-.63,2.85-2.23,4.81-3.83,4.81M29.36,11.19c-.82,0-2.03,1.52-2.52,3.76-.26,1.16-.28,2.34-.05,3.23.18.72.51,1.2.88,1.29.83.18,2.13-1.38,2.66-3.74.26-1.16.28-2.34.05-3.23-.18-.73-.51-1.21-.88-1.29-.04,0-.09-.01-.14-.01M30.97,15.87h0,0Z"/><path d="M22.35,22.53c-.06,0-.12,0-.18-.03-.36-.1-.56-.47-.46-.83l4.27-14.95c.1-.35.47-.56.83-.46.36.1.56.47.46.83l-4.27,14.95c-.08.29-.35.48-.64.48"/><path d="M31.2,23.74c-.06,0-.12,0-.18-.02-.36-.1-.56-.47-.46-.83l3.83-13.58c.1-.36.47-.56.83-.46.36.1.56.47.46.83l-3.83,13.59c-.08.29-.35.49-.65.49"/><path d="M35.03,10.15c-.07,0-.13,0-.2-.03l-8.42-2.57c-.35-.11-.55-.48-.45-.84.11-.35.48-.55.84-.45l8.42,2.57c.35.11.55.48.44.84-.09.29-.35.48-.64.48"/><path d="M31.2,23.74s-.06,0-.09,0l-8.85-1.21c-.36-.05-.62-.39-.57-.76.05-.37.39-.62.76-.57l8.85,1.21c.36.05.62.39.57.76-.05.34-.33.58-.66.58"/><path d="M15.8,61.18c-.37,0-.67-.3-.67-.67V11.98c0-.37.3-.67.67-.67s.67.3.67.67v48.54c0,.37-.3.67-.67.67"/><path d="M.67,65.06c-.15,0-.3-.05-.43-.15-.28-.23-.33-.66-.09-.94l15.13-18.43c.23-.29.66-.33.94-.09.29.24.33.66.09.94L1.19,64.82c-.13.16-.32.24-.52.24"/><path d="M30.92,65.06c-.19,0-.39-.08-.52-.24l-15.13-18.43c-.23-.29-.19-.71.09-.94.29-.23.71-.19.94.09l15.13,18.43c.23.29.19.71-.09.94-.13.1-.28.15-.43.15"/><path d="M15.8,61.29c-.2,0-.4-.09-.54-.27-.22-.3-.16-.71.13-.94l7.22-5.45c.3-.22.72-.17.94.13.22.29.16.71-.13.94l-7.22,5.45c-.12.09-.26.14-.4.14"/><path d="M15.79,61.29c-.14,0-.28-.04-.4-.14l-7.22-5.45c-.3-.22-.35-.64-.13-.94.22-.3.64-.35.94-.13l7.22,5.45c.29.22.35.64.13.94-.13.17-.33.27-.54.27"/></svg>
@@ -524,6 +531,14 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 7b — WAS DEN UNTERSCHIED MACHT (2/2) ========================= -->
+    <section class="slide p-diff">
+      <span class="pill reveal d1">Technische Ausstattung</span>
+      <h2 class="reveal d1">Was den Unterschied macht</h2>
+      <div class="table reveal d2">
         <div class="pdrow">
           <div class="lead"><div class="no">2.</div><div class="nm">Flexibilität</div></div>
           <div class="rt">
@@ -580,7 +595,7 @@ img,video,canvas,svg{ max-width:100%; max-height:100%; }
             <div class="poa">Preis auf Anfrage.</div>
           </div>
         </div>
-        <p class="note reveal d4"><b>Du zahlst nur das, was dein Event wirklich braucht.</b> Zusätzliche Leistungen wie Technik und Personal werden bedarfsgerecht kalkuliert. Jede Anfrage wird vorab auf Verfügbarkeit und Machbarkeit geprüft. <span style="font-size:19px">* Auf-/Abbautage exklusive</span></p>
+        <p class="note reveal d4"><b>Du zahlst nur das, was dein Event wirklich braucht.</b> Zusätzliche Leistungen wie Technik und Personal werden bedarfsgerecht kalkuliert. Jede Anfrage wird vorab auf Verfügbarkeit und Machbarkeit geprüft. <span style="font-size:32px">* Auf-/Abbautage exklusive</span></p>
       </div>
     </section>
 
