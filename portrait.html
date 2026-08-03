@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio 1 Live — Die Nr. 1 für Studiovermietung in Österreich (9:16)</title>
+
+<!-- ============================================================
+     FONTS — Agenda (brand, via Adobe Typekit) + Hanken Grotesk
+     fallback (Google Fonts). Same stack as the 16:9 version.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/vit5ssi.css">
+
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES (THEME) — identical to the 16:9 deck
+   ============================================================ */
+:root{
+    --red:        #DC1A31;
+    --red-bright: #F0263D;
+    --navy:       #0A1F3B;
+    --navy-panel: #112540;
+    --panel-grad: linear-gradient(180deg, #dc1a31 0%, #8a284f 50%, #14243f 100%);
+    --white:      #ffffff;
+    --ink:        #14161c;
+    --grey:       #5b6472;
+    --line:       #e4e7ec;
+    --stage-bg:   #05070d;
+    --font: "agenda", 'Hanken Grotesk', sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 0.75s;
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+/* ============================================================
+   viewport-base.css — FIXED 9:16 STAGE (adapted from the skill's
+   mandatory 16:9 base; dimensions swapped to 1080×1920 portrait)
+   ============================================================ */
+html,body{ width:100%; height:100%; margin:0; overflow:hidden; background:var(--stage-bg,#000); }
+.deck-viewport{ position:fixed; inset:0; overflow:hidden; background:var(--stage-bg,#000); }
+.deck-stage{ position:absolute; left:0; top:0; width:1080px; height:1920px; overflow:hidden; transform-origin:0 0; background:var(--slide-bg,#fff); }
+/* slide 2px larger than the stage -> edge panels bleed past right/bottom,
+   killing sub-pixel hairlines under fractional scaling (stage clips them) */
+.slide{ position:absolute; inset:0; width:1082px; height:1922px; overflow:hidden; display:block; visibility:hidden; opacity:0; pointer-events:none; background:var(--slide-bg,#fff); }
+.slide.active,.slide.visible{ visibility:visible; opacity:1; pointer-events:auto; z-index:1; }
+img,video,canvas,svg{ max-width:100%; max-height:100%; }
+@media print{
+    html,body{ width:1080px; height:auto; overflow:visible; background:#fff; }
+    .deck-viewport{ position:static; overflow:visible; background:#fff; }
+    .deck-stage{ position:static; width:auto; height:auto; transform:none !important; background:none; }
+    .slide{ position:relative; display:block !important; visibility:visible !important; opacity:1 !important; pointer-events:auto !important; width:1080px; height:1920px; break-after:page; page-break-after:always; }
+    .slide:last-child{ break-after:auto; page-break-after:auto; }
+}
+@media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation-duration:0.01ms !important; transition-duration:0.2s !important; }
+}
+
+/* ============================================================
+   TYPE BASE
+   ============================================================ */
+.slide{ font-family:var(--font); color:var(--ink); -webkit-font-smoothing:antialiased; }
+.slide h1,.slide h2,.slide h3{ font-weight:900; line-height:0.98; letter-spacing:-0.015em; }
+
+/* ============================================================
+   REVEAL ANIMATIONS (triggered by .visible on active slide)
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(34px); transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.slide.visible .reveal{ opacity:1; transform:translateY(0); }
+.reveal-left{ opacity:0; transform:translateX(-44px); transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.slide.visible .reveal-left{ opacity:1; transform:translateX(0); }
+.reveal-scale{ opacity:0; transform:scale(1.06); transition:opacity 1.1s var(--ease), transform 1.4s var(--ease); }
+.slide.visible .reveal-scale{ opacity:1; transform:scale(1); }
+.reveal-fade{ opacity:0; transition:opacity .9s var(--ease); }
+.slide.visible .reveal-fade{ opacity:1; }
+.d1{ transition-delay:.10s;} .d2{ transition-delay:.20s;} .d3{ transition-delay:.30s;}
+.d4{ transition-delay:.40s;} .d5{ transition-delay:.50s;} .d6{ transition-delay:.60s;}
+.d7{ transition-delay:.70s;} .d8{ transition-delay:.80s;} .d9{ transition-delay:.90s;}
+
+/* ============================================================
+   BRAND COMPONENTS (shared with the 16:9 deck)
+   ============================================================ */
+.pill{
+    display:inline-flex; align-items:center; justify-content:center;
+    height:56px; flex-shrink:0; padding:0 36px;
+    border:2px solid var(--red); border-radius:999px;
+    color:var(--red); font-weight:800; font-size:22px;
+    letter-spacing:.12em; text-transform:uppercase;
+}
+.s1l{ display:inline-flex; align-items:flex-start; position:relative; line-height:1; }
+.s1l .word{ font-weight:800; letter-spacing:-.01em; }
+
+.body{ color:var(--grey); font-size:27px; line-height:1.55; font-weight:400; }
+.body.on-dark{ color:rgba(255,255,255,.82); }
+.body strong,.body b{ color:inherit; font-weight:800; }
+.lead-red{ color:var(--red); font-weight:800; }
+
+/* ============================================================
+   SLIDE 1 — COVER
+   ============================================================ */
+.p-cover{ background:var(--navy); }
+.p-cover .bg{ position:absolute; inset:0; background:url('assets/cover-onair.jpg') center/cover no-repeat; }
+.p-cover .scrim{ position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(5,10,22,.62) 0%, rgba(6,12,26,.12) 30%, rgba(6,12,26,.35) 55%, rgba(6,12,26,.86) 82%, rgba(4,7,16,.97) 100%); }
+.p-cover .headline{ position:absolute; left:80px; right:80px; top:960px; }
+.p-cover .headline h1{ color:#fff; font-size:132px; font-weight:900; line-height:0.95; letter-spacing:-.02em; text-transform:uppercase; }
+.p-cover .headline .dot{ color:var(--red); }
+.p-cover .sub{ position:absolute; left:84px; right:80px; top:1430px; color:#fff; font-size:46px; font-weight:400; line-height:1.18; }
+.p-cover .sub b{ color:var(--red); }
+.p-cover .cover-logo{ position:absolute; left:80px; bottom:96px; width:360px; height:auto;
+    filter:drop-shadow(0 2px 14px rgba(0,0,0,.65)); }
+
+/* ============================================================
+   SLIDE 2 — WILLKOMMEN  (navy header / white body / photo foot)
+   ============================================================ */
+.p-welcome{ display:grid; grid-template-rows:600px 940px 380px; }
+.p-welcome .col-navy{ background:var(--navy); padding:96px 80px 0; display:flex; flex-direction:column; justify-content:center; }
+.p-welcome .col-navy h2{ color:#fff; font-size:92px; line-height:1.0; text-transform:uppercase; }
+.p-welcome .col-navy h2 .red{ color:var(--red); }
+.p-welcome .tags{ margin-top:40px; color:#fff; font-size:29px; font-weight:400; letter-spacing:.01em; }
+.p-welcome .tags .sep{ color:var(--red); margin:0 14px; }
+.p-welcome .col-white{ background:#fff; padding:90px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-welcome .col-white .pill{ margin-bottom:34px; align-self:flex-start; }
+.p-welcome .col-white h3{ font-size:66px; line-height:1.04; text-transform:uppercase; color:var(--ink); }
+.p-welcome .col-white h3 .red{ color:var(--red); }
+.p-welcome .col-white .body{ margin-top:34px; }
+.p-welcome .col-white .body + .body{ margin-top:24px; }
+.p-welcome .col-photo{ background:url('assets/welcome-studio.jpg') center 30%/cover no-repeat; position:relative; }
+.p-welcome .col-photo::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,31,59,.12), rgba(10,31,59,.34)); }
+
+/* ============================================================
+   SLIDE 3 — DAS STUDIO  (photo / red features / marx+standort)
+   ============================================================ */
+.p-studio{ display:grid; grid-template-rows:700px 780px 440px; }
+.p-studio .col-photo{ position:relative; background:url('assets/studio-walk.jpg') center/cover no-repeat; }
+.p-studio .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.92) 6%, rgba(6,12,26,.15) 55%, rgba(6,12,26,.35)); }
+.p-studio .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
+.p-studio .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:74px; }
+.p-studio .col-photo h2{ color:#fff; font-size:76px; line-height:1.0; text-transform:uppercase; }
+.p-studio .col-photo .kick{ color:var(--red); font-size:30px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-top:22px; }
+.p-studio .col-red{ background:var(--panel-grad); padding:70px 80px; color:#fff; display:flex; flex-direction:column; }
+.p-studio .feat-row{ display:flex; gap:34px; margin-bottom:44px; }
+.p-studio .feat{ flex:1; }
+.p-studio .feat img{ height:64px; width:auto; display:block; margin-bottom:20px; }
+.p-studio .feat .fl{ font-size:29px; font-weight:800; line-height:1.15; }
+.p-studio .feat-div{ width:2px; align-self:stretch; background:rgba(255,255,255,.4); }
+.p-studio .col-red h3{ font-size:52px; line-height:1.05; text-transform:uppercase; }
+.p-studio .col-red .body{ color:rgba(255,255,255,.9); font-size:25px; margin-top:24px; }
+.p-studio .col-marx{ position:relative; background:url('assets/media-quarter-marx.jpg') center/cover no-repeat; }
+.p-studio .col-marx .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.5), rgba(6,12,26,.05) 70%); }
+.p-studio .standort{ position:absolute; left:80px; right:80px; top:56px; bottom:56px; background:#fff; border-radius:22px; padding:34px 40px; box-shadow:0 24px 60px rgba(0,0,0,.35); display:flex; flex-direction:column; justify-content:center; }
+.p-studio .standort .head{ display:flex; align-items:center; gap:16px; margin-bottom:18px; }
+.p-studio .standort .head svg{ height:44px; color:var(--red); }
+.p-studio .standort .head .t{ font-size:26px; font-weight:800; }
+.p-studio .standort .head .t b{ color:var(--red); display:block; font-size:30px; }
+.p-studio .standort ul{ list-style:none; }
+.p-studio .standort li{ position:relative; padding-left:26px; font-size:25px; color:var(--grey); margin-top:9px; }
+.p-studio .standort li::before{ content:''; position:absolute; left:0; top:12px; width:10px; height:10px; border-radius:50%; background:var(--red); }
+
+/* ============================================================
+   SLIDE 4 — GEBAUT FÜR LIVE-MOMENTE  (photo / red stats)
+   ============================================================ */
+.p-facts{ display:grid; grid-template-rows:860px 1060px; background:var(--navy); }
+.p-facts .col-photo{ position:relative; background:url('assets/camera.jpg') center/cover no-repeat; }
+.p-facts .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.55), rgba(6,12,26,0) 55%); }
+.p-facts .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
+.p-facts .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:80px; text-shadow:0 2px 18px rgba(0,0,0,.75); }
+.p-facts .col-photo h2{ color:#fff; font-size:92px; line-height:0.98; text-transform:uppercase; }
+.p-facts .col-photo .kick{ color:var(--red); font-size:34px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:24px; line-height:1.2; }
+.p-facts .col-stats{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; gap:48px; }
+.p-facts .stat .icn{ height:60px; width:auto; margin-bottom:26px; display:block; }
+.p-facts .stat .lbl{ color:#fff; font-size:28px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+.p-facts .stat .num{ color:#fff; font-size:190px; font-weight:900; line-height:0.9; letter-spacing:-.03em; margin:6px 0; }
+.p-facts .stat .num .cval{ display:inline-block; text-align:right; font-variant-numeric:tabular-nums; }
+.p-facts .stat .num .unit{ font-size:72px; vertical-align:top; margin-left:10px; }
+.p-facts .stat .cap{ color:rgba(255,255,255,.92); font-size:27px; line-height:1.4; max-width:820px; }
+.p-facts .divide{ height:2px; background:rgba(255,255,255,.3); }
+
+/* ============================================================
+   SLIDE 5 — VORTEILE  (red bg, 3 horizontal white cards)
+   ============================================================ */
+.p-benefits{ background:var(--panel-grad); padding:80px 80px; display:flex; flex-direction:column; }
+.p-benefits .pill{ border-color:#fff; color:#fff; background:none; align-self:flex-start; margin-bottom:38px; }
+.p-benefits h2{ color:#fff; font-size:72px; text-transform:uppercase; line-height:1.0; }
+.p-benefits .intro{ color:rgba(255,255,255,.9); font-size:26px; line-height:1.5; margin-top:22px; }
+.p-benefits .cards{ display:flex; flex-direction:column; gap:28px; margin-top:44px; }
+.pbcard{ background:#fff; border-radius:26px; padding:38px 40px; display:flex; align-items:flex-start; gap:36px; }
+.pbcard .ic{ height:88px; width:96px; flex-shrink:0; color:var(--red); }
+.pbcard .txt h3{ color:var(--ink); font-size:38px; line-height:1.05; }
+.pbcard .txt .st{ color:var(--red); font-size:22px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; margin:12px 0 12px; line-height:1.25; }
+.pbcard .txt p{ color:var(--grey); font-size:24px; line-height:1.5; }
+
+/* ============================================================
+   SLIDE 6 — TECHNIK INTRO  (photo / text)
+   ============================================================ */
+.p-tech{ display:grid; grid-template-rows:780px 1140px; }
+.p-tech .col-photo{ position:relative; background:url('assets/control-desk.jpg') 30% center/cover no-repeat; }
+.p-tech .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.9) 5%, rgba(6,12,26,.15) 55%); }
+.p-tech .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
+.p-tech .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:74px; }
+.p-tech .col-photo h2{ color:#fff; font-size:100px; text-transform:uppercase; line-height:0.98; }
+.p-tech .col-photo .kick{ color:var(--red); font-size:36px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-top:22px; }
+.p-tech .col-text{ background:#fff; padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-tech .col-text .eyebrow{ color:var(--red); font-size:24px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:26px; }
+.p-tech .col-text h3{ font-size:70px; text-transform:uppercase; line-height:1.02; color:var(--ink); }
+.p-tech .col-text h3 .red{ color:var(--red); }
+.p-tech .col-text .body{ margin-top:36px; font-size:30px; }
+.p-tech .chips{ display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:44px; }
+.p-tech .chip{ border:2px solid var(--line); border-radius:14px; padding:18px 26px; font-size:24px; font-weight:700; color:var(--navy); }
+.p-tech .chip b{ color:var(--red); }
+
+/* ============================================================
+   SLIDE 7 — WAS DEN UNTERSCHIED MACHT  (red bg, stacked table)
+   ============================================================ */
+.p-diff{ background:var(--panel-grad); padding:76px 70px; display:flex; flex-direction:column; }
+.p-diff .pill{ border-color:#fff; color:#fff; background:none; align-self:flex-start; margin-bottom:40px; }
+.p-diff h2{ color:#fff; font-size:70px; text-transform:uppercase; margin-bottom:40px; }
+.p-diff .table{ background:#fff; border-radius:26px; overflow:hidden; flex:1; display:flex; flex-direction:column; }
+.pdrow{ display:grid; grid-template-columns:230px 1fr; align-items:stretch; flex:1; }
+.pdrow .lead{ background:var(--red); color:#fff; padding:36px 32px; display:flex; flex-direction:column; justify-content:center; }
+.pdrow .lead .no{ color:#fff; font-size:52px; font-weight:900; line-height:1; }
+.pdrow .lead .nm{ color:#fff; font-size:36px; font-weight:900; margin-top:8px; letter-spacing:-.01em; }
+.pdrow .rt{ padding:32px 44px; border-top:2px solid rgba(220,26,49,.22); display:flex; flex-direction:column; justify-content:center; }
+.pdrow:first-child .rt{ border-top:none; }
+.pdrow .cap{ color:var(--red); font-size:24px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.pdrow .cols{ display:grid; grid-template-columns:1fr 1fr; gap:18px 40px; }
+.pdrow .cols .grp .h{ color:var(--ink); font-size:22px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; margin-bottom:8px; }
+.pdrow ul{ list-style:none; }
+.pdrow li{ position:relative; padding-left:24px; font-size:23px; color:var(--grey); line-height:1.35; margin-top:8px; }
+.pdrow li:first-child{ margin-top:0; }
+.pdrow li::before{ content:''; position:absolute; left:0; top:11px; width:9px; height:9px; border-radius:50%; background:var(--red); }
+
+/* ============================================================
+   SLIDE 8 — SERVICE & LEISTUNGEN  (photo / pricing)
+   ============================================================ */
+.p-service{ display:grid; grid-template-rows:560px 1360px; }
+.p-service .col-photo{ position:relative; background:url('assets/makeup.jpg') center 30%/cover no-repeat; }
+.p-service .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.7), rgba(6,12,26,.05) 60%); }
+.p-service .col-photo .pill{ position:absolute; top:60px; left:80px; z-index:3; background:rgba(10,31,59,.4); border-color:#fff; color:#fff; }
+.p-service .col-photo .txt{ position:absolute; left:80px; right:80px; bottom:66px; }
+.p-service .col-photo h2{ color:#fff; font-size:74px; text-transform:uppercase; line-height:1.0; }
+.p-service .col-buy{ background:#fff; padding:70px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-service .col-buy .pill{ margin-bottom:26px; align-self:flex-start; }
+.p-service .col-buy h3{ font-size:52px; text-transform:uppercase; color:var(--ink); }
+.p-service .col-buy .subline{ color:var(--grey); font-size:28px; margin-top:12px; margin-bottom:40px; }
+.p-service .plans{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.pplan{ border:2px solid var(--line); border-radius:22px; padding:34px 32px; }
+.pplan h4{ color:var(--red); font-size:27px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.pplan .price{ font-size:56px; font-weight:900; color:var(--ink); line-height:1; }
+.pplan .price small{ display:block; font-size:21px; color:var(--grey); font-weight:600; margin-top:8px; }
+.pplan .incl{ font-size:22px; color:var(--grey); margin-top:16px; line-height:1.4; }
+.pplan .divh{ height:1px; background:var(--line); margin:22px 0; }
+.pplan .ideal{ font-size:20px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px; }
+.pplan ul{ list-style:none; }
+.pplan li{ position:relative; padding-left:24px; font-size:22px; color:var(--grey); margin-top:10px; line-height:1.3; }
+.pplan li::before{ content:''; position:absolute; left:0; top:10px; width:8px; height:8px; border-radius:50%; background:var(--red); }
+.pplan .poa{ color:var(--red); font-weight:800; font-size:23px; margin-top:20px; }
+.p-service .note{ font-size:23px; color:var(--grey); line-height:1.5; margin-top:32px; }
+.p-service .note b{ color:var(--ink); font-weight:800; }
+
+/* ============================================================
+   SLIDE 9 — USE CASE 1  (photo / navy text)
+   ============================================================ */
+.p-uc1{ display:grid; grid-template-rows:720px 1200px; background:var(--navy); }
+.p-uc1 .photo-col{ position:relative; background:url('assets/usecase1-audience.jpg') center/cover no-repeat; }
+.p-uc1 .photo-col::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,31,59,.55) 4%, rgba(6,12,26,0) 40%); }
+.p-uc1 .text-col{ background:var(--navy); padding:80px 80px; display:flex; flex-direction:column; justify-content:center; }
+.p-uc1 .text-col .pill{ align-self:flex-start; background:var(--navy); margin-bottom:30px; }
+.p-uc1 .text-col h2{ color:#fff; font-size:82px; text-transform:uppercase; line-height:1.0; }
+.p-uc1 .text-col .uc{ color:var(--red); font-size:26px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:18px 0 26px; }
+.p-uc1 .text-col .body{ color:rgba(255,255,255,.85); font-size:27px; line-height:1.5; }
+.p-uc1 .text-col .body b{ color:#fff; }
+.p-uc1 .text-col .divider{ height:2px; background:rgba(255,255,255,.16); margin:36px 0; }
+.p-uc1 .text-col h3{ color:#fff; font-size:46px; text-transform:uppercase; line-height:1.05; margin-bottom:18px; }
+.p-uc1 .text-col h3 .red{ color:var(--red); }
+
+/* ============================================================
+   SLIDE 10 — USE CASE 2  (navy text / photo collage)
+   ============================================================ */
+.p-uc2{ display:grid; grid-template-rows:700px 1220px; background:var(--navy); }
+.p-uc2 .text-col{ padding:96px 80px 0; display:flex; flex-direction:column; justify-content:center; }
+.p-uc2 .text-col .pill{ align-self:flex-start; background:var(--navy); margin-bottom:30px; }
+.p-uc2 .text-col h2{ color:#fff; font-size:84px; text-transform:uppercase; line-height:1.0; }
+.p-uc2 .text-col .uc{ color:var(--red); font-size:26px; font-weight:900; letter-spacing:.08em; text-transform:uppercase; margin:20px 0 26px; }
+.p-uc2 .text-col .body{ color:rgba(255,255,255,.85); font-size:27px; line-height:1.5; }
+.p-uc2 .photos{ position:relative; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1.35fr 1fr; gap:18px; padding:40px 80px 80px; }
+.p-uc2 .photos .im{ background-size:cover; background-position:center; border-radius:16px; }
+.p-uc2 .photos .big{ grid-column:1 / -1; background-image:url('assets/usecase2-main.jpg'); }
+.p-uc2 .photos .a{ background-image:url('assets/usecase2-a.jpg'); }
+.p-uc2 .photos .b{ background-image:url('assets/usecase2-c.jpg'); }
+
+/* ============================================================
+   SLIDE 11 — KONTAKT  (photo / info)
+   ============================================================ */
+.p-contact{ display:grid; grid-template-rows:700px 1220px; }
+.p-contact .col-photo{ position:relative; background:url('assets/ready-mic.jpg') center/cover no-repeat; }
+.p-contact .col-photo .scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(6,12,26,.6), rgba(6,12,26,0) 50%); }
+.p-contact .col-photo h2{ position:absolute; left:80px; bottom:64px; color:#fff; font-size:150px; font-weight:900; letter-spacing:-.03em; text-transform:uppercase; }
+.p-contact .col-info{ background:#fff; padding:76px 80px; display:flex; flex-direction:column; justify-content:center; position:relative; }
+.p-contact .col-info .pill{ margin-bottom:30px; align-self:flex-start; }
+.p-contact .col-info h3{ font-size:80px; text-transform:uppercase; color:var(--ink); }
+.p-contact .col-info .red-sub{ color:var(--red); font-size:38px; font-weight:900; text-transform:uppercase; margin-top:12px; }
+.p-contact .col-info .body{ margin-top:32px; }
+.p-contact .contact-card{ border:2px solid var(--red); border-radius:24px; padding:40px 44px; margin-top:44px; }
+.p-contact .contact-card .h{ font-size:27px; font-weight:900; letter-spacing:.02em; text-transform:uppercase; color:var(--ink); margin-bottom:28px; }
+.p-contact .contact-card .people{ display:grid; grid-template-columns:1fr 1fr; gap:24px 40px; }
+.p-contact .contact-card .nm{ color:var(--red); font-size:29px; font-weight:900; letter-spacing:.02em; }
+.p-contact .contact-card .ph{ color:var(--grey); font-size:25px; }
+.p-contact .contact-card .mail{ grid-column:1 / -1; display:flex; align-items:center; gap:14px; color:var(--grey); font-size:25px; margin-top:8px; }
+.p-contact .contact-card .mail svg,.p-contact .contact-card .nm-row svg{ height:27px; color:var(--red); }
+.p-contact .contact-card .nm-row{ display:flex; align-items:center; gap:12px; margin-top:8px; }
+
+/* ============================================================
+   SLIDE 12 — CLOSING
+   ============================================================ */
+.p-end{ background:var(--navy); position:relative; overflow:hidden; }
+.p-end .logo-big{ position:absolute; left:50%; transform:translateX(-50%); top:150px; width:520px; height:auto; }
+.p-end .wall-strip{ position:absolute; left:0; right:0; top:560px; width:1080px; height:560px; object-fit:cover; }
+.p-end .wall-strip-scrim{ position:absolute; left:0; right:0; top:560px; height:560px; background:linear-gradient(180deg, rgba(10,31,59,.35), rgba(10,31,59,0) 30%, rgba(10,31,59,0) 70%, rgba(10,31,59,.45)); }
+.p-end .menu{ position:absolute; left:80px; right:80px; top:1200px; display:grid; grid-template-columns:1fr 1fr; gap:0 40px; }
+.p-end .menu div{ color:#fff; font-size:40px; font-weight:500; letter-spacing:.12em; padding:20px 0; border-top:1px solid rgba(255,255,255,.25); }
+.p-end .addr{ position:absolute; left:80px; bottom:90px; }
+.p-end .addr .co{ color:var(--red); font-size:28px; font-weight:700; letter-spacing:.06em; }
+.p-end .addr .ln{ color:rgba(255,255,255,.55); font-size:25px; font-weight:400; letter-spacing:.06em; margin-top:12px; }
+
+/* ============================================================
+   DECK CHROME — progress bar + slide counter
+   ============================================================ */
+#progress{ position:fixed; top:0; left:0; height:5px; background:var(--red); z-index:1200; transition:width .4s var(--ease); box-shadow:0 0 14px rgba(220,26,49,.7); }
+#counter{ position:fixed; right:16px; bottom:16px; z-index:1200; color:#fff; background:rgba(10,31,59,.72);
+    padding:8px 15px; border-radius:999px; font-family:var(--font); font-size:16px; font-weight:800; letter-spacing:.09em;
+    -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px); box-shadow:0 4px 16px rgba(0,0,0,.2); }
+#counter b{ color:#ff5364; }
+#hint{ position:fixed; left:50%; bottom:16px; transform:translateX(-50%); z-index:1200; color:#fff;
+    background:rgba(10,31,59,.6); padding:7px 16px; border-radius:999px;
+    -webkit-backdrop-filter:blur(5px); backdrop-filter:blur(5px);
+    font-family:var(--font); font-size:14px; letter-spacing:.06em; transition:opacity .6s; }
+
+/* Inline edit toggle */
+.edit-hotzone{ position:fixed; top:0; left:0; width:80px; height:80px; z-index:10000; }
+.edit-toggle{ position:fixed; top:18px; left:18px; z-index:10001; width:52px; height:52px; border:none; border-radius:14px;
+    background:var(--red); color:#fff; font-size:22px; cursor:pointer; opacity:0; pointer-events:none; transition:opacity .3s; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+.edit-toggle.show,.edit-toggle.active{ opacity:1; pointer-events:auto; }
+.edit-toggle.active{ background:var(--navy); }
+[contenteditable="true"]{ outline:2px dashed rgba(220,26,49,.7); outline-offset:4px; border-radius:4px; cursor:text; }
+#editbar{ position:fixed; top:18px; left:84px; z-index:10001; display:none; gap:10px; align-items:center;
+    background:rgba(10,31,59,.95); color:#fff; padding:10px 16px; border-radius:12px; font-family:var(--font); font-size:15px; }
+#editbar.show{ display:flex; }
+#editbar button{ background:var(--red); color:#fff; border:none; border-radius:8px; padding:8px 14px; font-weight:700; cursor:pointer; font-family:var(--font); }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <!-- ========================= SLIDE 1 — COVER ========================= -->
+    <section class="slide p-cover active">
+      <div class="bg reveal-scale"></div>
+      <div class="scrim"></div>
+      <div class="headline">
+        <h1 class="reveal d2">Ideen<br>bekommen<br>Flügel<span class="dot">.</span></h1>
+      </div>
+      <div class="sub reveal d4"><b>Die Nr. 1</b> für Studiovermietung<br>in Österreich.</div>
+      <img class="cover-logo reveal-fade d5" src="assets/studio1live_logo.svg" alt="Studio 1 Live">
+    </section>
+
+    <!-- ========================= SLIDE 2 — WILLKOMMEN ========================= -->
+    <section class="slide p-welcome">
+      <div class="col-navy">
+        <h2 class="reveal-left d1">Willkommen<br><span class="red">bei Studio 1 Live</span></h2>
+        <div class="tags reveal-left d3">BROADCAST<span class="sep">•</span>STREAMING<span class="sep">•</span>EVENTS<span class="sep">•</span>TALKS<span class="sep">•</span>KEYNOTES</div>
+      </div>
+      <div class="col-white">
+        <span class="pill reveal d1">Welcome</span>
+        <h3 class="reveal d2">Die Bühne für<br><span class="red">grosse Momente.</span></h3>
+        <p class="body reveal d3">Studio 1 Live verbindet modernste Broadcast-Technologie mit außergewöhnlicher Eventinszenierung. Das Studio bietet die ideale Bühne für Live-Kommunikation, hybride Events, Streaming-Produktionen und Markenauftritte mit maximaler Reichweite.</p>
+        <p class="body reveal d4">Flexible Raumkonzepte, hochwertige Technik und erfahrene Produktionsteams schaffen die perfekte Umgebung für professionelle Veranstaltungen.</p>
+      </div>
+      <div class="col-photo reveal-fade"></div>
+    </section>
+
+    <!-- ========================= SLIDE 3 — DAS STUDIO ========================= -->
+    <section class="slide p-studio">
+      <div class="col-photo">
+        <span class="pill reveal d1">Das Studio</span>
+        <div class="scrim"></div>
+        <div class="txt">
+          <h2 class="reveal-left d2">Kein 0815 Eventraum.<br>Sondern eine Bühne.</h2>
+          <div class="kick reveal-left d4">Wo Auftritte beginnen.</div>
+        </div>
+      </div>
+      <div class="col-red">
+        <div class="feat-row reveal d2">
+          <div class="feat">
+            <img src="assets/Setups.svg" alt="" aria-hidden="true">
+            <div class="fl">Individuelle<br>Setups</div>
+          </div>
+          <div class="feat-div"></div>
+          <div class="feat">
+            <img src="assets/Technik.svg" alt="" aria-hidden="true">
+            <div class="fl">Modernste<br>Broadcast-Technik</div>
+          </div>
+        </div>
+        <h3 class="reveal d3">Flexibel. Hochwertig.<br>Eindrucksvoll.</h3>
+        <p class="body reveal d4">Studio 1 Live vereint die Atmosphäre einer modernen Eventlocation mit den Möglichkeiten eines professionellen Broadcast-Studios. Flexible Setups, hochwertige Produktionen und eine beeindruckende technische Infrastruktur schaffen maximale Gestaltungsfreiheit für besondere Momente mitten in Wien.</p>
+      </div>
+      <div class="col-marx">
+        <div class="scrim"></div>
+        <div class="standort reveal d3">
+          <div class="head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s7-6.4 7-12A7 7 0 0 0 5 10c0 5.6 7 12 7 12z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            <div class="t">Standort:<b>Neu Marx | 1030 Wien</b></div>
+          </div>
+          <ul>
+            <li>Nur wenige Minuten vom Hauptbahnhof</li>
+            <li>schnelle Anbindung zum Flughafen</li>
+            <li>Parkmöglichkeiten direkt vor Ort</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 4 — GEBAUT FÜR LIVE-MOMENTE ========================= -->
+    <section class="slide p-facts">
+      <div class="col-photo">
+        <div class="scrim"></div>
+        <span class="pill reveal d1">Vorteile im Überblick</span>
+        <div class="txt">
+          <h2 class="reveal-left d2">Gebaut für<br>Live-Momente.</h2>
+          <div class="kick reveal-left d3">Einsatzbereit für TV,<br>Streaming und Events.</div>
+        </div>
+      </div>
+      <div class="col-stats">
+        <div class="stat reveal d3">
+          <img class="icn" src="assets/Studio.svg" alt="" aria-hidden="true">
+          <div class="lbl">Studiofläche</div>
+          <div class="num"><span class="cval" data-to="500">0</span><span class="unit">m²</span></div>
+          <div class="cap">Großzügige Eventfläche für exklusive Business-Veranstaltungen</div>
+        </div>
+        <div class="divide reveal d4"></div>
+        <div class="stat reveal d5">
+          <div class="lbl">Kapazität</div>
+          <div class="num"><span class="cval" data-to="350">0</span></div>
+          <div class="cap">Gäst:innen – vom Presseevent bis zur hybriden Konferenz</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 5 — VORTEILE ========================= -->
+    <section class="slide p-benefits">
+      <span class="pill reveal d1">Vorteile im Überblick</span>
+      <h2 class="reveal d1">Mitten in einer Kulisse,<br>in der Geschichten entstehen.</h2>
+      <p class="intro reveal d2">In Studio 1 Live veranstaltest du nicht „irgendein Event“ – du stehst mitten in einer Kulisse, in der sonst Geschichten entstehen, Kameras laufen und Ideen groß gedacht werden. Ob Launch, Talk, Vortrag, Keynote, Townhall, Panel oder Networking-Format: dieses Fernsehstudio verwandelt jedes Event in eine Inszenierung.</p>
+      <div class="cards">
+        <div class="pbcard reveal d2">
+          <svg class="ic" viewBox="0 0 45.18 65.06" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M34.89,32.87s-.04,0-.06,0l-9.99-.91c-.28-.03-.51-.22-.59-.49l-2.46-9.1-6.15-2.35c-8.04-2.6-7.86-6.8-7.41-8.48,0,0,0-.02.01-.04l1.62-4.9s.01-.04.03-.07c2.25-4.97,9.09-2.4,11.4-1.52l5.09,1.16L31.97.21c.17-.18.43-.26.67-.19l9.18,2.64c.23.07.41.25.47.49.05.23-.02.48-.2.64l-5.54,5.17,8.02.88c.19.02.36.12.48.28.11.16.15.36.1.54l-3.97,15.99c-.05.18-.17.34-.34.43-.17.09-.37.1-.54.04l-7.92-2.93,3.12,7.73c.09.22.06.46-.08.65-.13.17-.33.27-.54.27M25.42,30.67l8.43.77-3.28-8.11c-.1-.25-.04-.53.14-.72.18-.19.46-.25.71-.16l8.64,3.19,3.6-14.52-8.71-.96c-.26-.03-.48-.21-.56-.45-.08-.25-.01-.52.18-.7l5.74-5.36-7.65-2.2-5.57,5.94c-.16.17-.4.25-.64.19l-5.51-1.26s-.06-.02-.09-.03c-7.92-3.02-9.29-.21-9.73.77l-1.61,4.85c-.73,2.77,1.66,5.27,6.55,6.85.01,0,.02,0,.03.01l6.48,2.47c.2.08.35.24.41.45l2.43,8.98Z"/><path d="M27.8,20.82c-.14,0-.28-.02-.42-.05-.9-.2-1.57-1.01-1.89-2.27-.28-1.1-.26-2.47.04-3.85.69-3.1,2.52-5.14,4.25-4.76.9.2,1.57,1,1.89,2.27.28,1.1.26,2.47-.05,3.84-.63,2.85-2.23,4.81-3.83,4.81M29.36,11.19c-.82,0-2.03,1.52-2.52,3.76-.26,1.16-.28,2.34-.05,3.23.18.72.51,1.2.88,1.29.83.18,2.13-1.38,2.66-3.74.26-1.16.28-2.34.05-3.23-.18-.73-.51-1.21-.88-1.29-.04,0-.09-.01-.14-.01M30.97,15.87h0,0Z"/><path d="M22.35,22.53c-.06,0-.12,0-.18-.03-.36-.1-.56-.47-.46-.83l4.27-14.95c.1-.35.47-.56.83-.46.36.1.56.47.46.83l-4.27,14.95c-.08.29-.35.48-.64.48"/><path d="M31.2,23.74c-.06,0-.12,0-.18-.02-.36-.1-.56-.47-.46-.83l3.83-13.58c.1-.36.47-.56.83-.46.36.1.56.47.46.83l-3.83,13.59c-.08.29-.35.49-.65.49"/><path d="M35.03,10.15c-.07,0-.13,0-.2-.03l-8.42-2.57c-.35-.11-.55-.48-.45-.84.11-.35.48-.55.84-.45l8.42,2.57c.35.11.55.48.44.84-.09.29-.35.48-.64.48"/><path d="M31.2,23.74s-.06,0-.09,0l-8.85-1.21c-.36-.05-.62-.39-.57-.76.05-.37.39-.62.76-.57l8.85,1.21c.36.05.62.39.57.76-.05.34-.33.58-.66.58"/><path d="M15.8,61.18c-.37,0-.67-.3-.67-.67V11.98c0-.37.3-.67.67-.67s.67.3.67.67v48.54c0,.37-.3.67-.67.67"/><path d="M.67,65.06c-.15,0-.3-.05-.43-.15-.28-.23-.33-.66-.09-.94l15.13-18.43c.23-.29.66-.33.94-.09.29.24.33.66.09.94L1.19,64.82c-.13.16-.32.24-.52.24"/><path d="M30.92,65.06c-.19,0-.39-.08-.52-.24l-15.13-18.43c-.23-.29-.19-.71.09-.94.29-.23.71-.19.94.09l15.13,18.43c.23.29.19.71-.09.94-.13.1-.28.15-.43.15"/><path d="M15.8,61.29c-.2,0-.4-.09-.54-.27-.22-.3-.16-.71.13-.94l7.22-5.45c.3-.22.72-.17.94.13.22.29.16.71-.13.94l-7.22,5.45c-.12.09-.26.14-.4.14"/><path d="M15.79,61.29c-.14,0-.28-.04-.4-.14l-7.22-5.45c-.3-.22-.35-.64-.13-.94.22-.3.64-.35.94-.13l7.22,5.45c.29.22.35.64.13.94-.13.17-.33.27-.54.27"/></svg>
+          <div class="txt">
+            <h3>Starke Inszenierung</h3>
+            <div class="st">Streaming, Aufzeichnung und digitale Studiodeko</div>
+            <p>Erreiche dein Publikum vor Ort, im Livestream oder On Demand. Digitale Hintergründe, Lichtstimmungen und Branding-Elemente lassen sich individuell auf die Veranstaltung abstimmen.</p>
+          </div>
+        </div>
+        <div class="pbcard reveal d3">
+          <svg class="ic" viewBox="0 0 45.17 59.73" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M39.98,59.73c-.14,0-.28-.04-.39-.13L5.25,32.93c-.28-.22-.33-.62-.11-.9.22-.28.62-.33.9-.11l34.34,26.66c.28.22.33.62.11.9-.13.16-.31.25-.51.25"/><path d="M5.65,59.73c-.19,0-.38-.08-.51-.25-.22-.28-.17-.68.11-.9l34.34-26.66c.28-.22.68-.17.9.11.22.28.17.68-.11.9L6.04,59.59c-.12.09-.26.13-.39.13"/><path d="M37.1,49.55c-.14,0-.28-.04-.39-.13l-20.55-15.96c-.28-.22-.33-.62-.11-.9.22-.28.62-.33.9-.11l20.55,15.95c.28.22.33.62.11.9-.13.16-.31.25-.51.25"/><path d="M8.53,49.55c-.19,0-.38-.08-.51-.25-.22-.28-.17-.68.11-.9l20.55-15.95c.28-.22.68-.17.9.11.22.28.17.68-.11.9l-20.55,15.96c-.12.09-.26.13-.39.13"/><path d="M22.43,15.37c-4.44,0-8.76-.23-12.92-.69-.81-.02-1.46-.7-1.46-1.54V3.07c0-.85.67-1.55,1.51-1.55h.11c8.06,1.39,16.92,1.39,26.32,0h.09c.83,0,1.51.69,1.51,1.54v10.07c0,.84-.66,1.52-1.47,1.54-4.66.46-9.23.69-13.67.69M9.52,2.8c-.11.02-.19.13-.19.26v10.07c0,.15.1.27.23.27h.07c8.25.92,17.12.92,26.38,0h.06c.12,0,.23-.12.23-.27V3.07c0-.14-.09-.25-.2-.26-9.48,1.39-18.42,1.39-26.58,0"/><path d="M8.69,26.74c-.35,0-.64-.29-.64-.64V.64C8.05.29,8.34,0,8.69,0s.64.29.64.64v25.46c0,.35-.29.64-.64.64"/><path d="M36.94,25.74c-.35,0-.64-.29-.64-.64V.64c0-.35.29-.64.64-.64s.64.29.64.64v24.47c0,.35-.29.64-.64.64"/><path d="M3.77,29.87c-.35,0-.64-.29-.64-.64v-9.15c0-.35.29-.64.64-.64s.64.29.64.64v9.15c0,.35-.29.64-.64.64"/><path d="M41.86,30.21c-.35,0-.64-.29-.64-.64v-9.82c0-.35.29-.64.64-.64s.64.29.64.64v9.82c0,.35-.29.64-.64.64"/><path d="M.64,21.83c-.23,0-.45-.12-.56-.33-.17-.31-.06-.7.25-.87l7.9-4.32c.31-.17.7-.06.87.25.17.31.06.7-.25.87L.95,21.75c-.1.05-.2.08-.31.08"/><path d="M44.53,21.56c-.1,0-.2-.02-.29-.07l-7.25-3.78c-.31-.16-.43-.55-.27-.86.16-.31.55-.43.86-.27l7.25,3.78c.31.16.43.55.27.86-.11.22-.34.34-.57.34"/><path d="M22.62,33.67c-6.49,0-12.94-.26-19.27-.78-.65-.05-1.18-.46-1.39-1.06-.21-.59-.05-1.23.41-1.66l4.56-4.27c.34-.32.81-.48,1.29-.43,13.65,1.43,15.32,1.34,29.17,0,.47-.05.93.11,1.28.43l4.56,4.26c.46.43.62,1.07.41,1.66-.21.6-.75,1.01-1.39,1.06-4.43.35-8.89.59-13.27.71-2.12.06-4.25.08-6.37.08M8.06,26.74c-.09,0-.18.03-.24.09l-4.56,4.27c-.12.11-.1.24-.08.3.02.06.09.19.28.21,8.35.69,16.93.92,25.5.7,4.35-.11,8.79-.35,13.2-.7.2-.02.27-.15.29-.21.02-.06.04-.19-.08-.3l-4.56-4.26c-.07-.07-.18-.1-.28-.09-13.97,1.36-15.65,1.44-29.43,0-.01,0-.02,0-.04,0"/></svg>
+          <div class="txt">
+            <h3>Perfekt vorbereitet</h3>
+            <div class="st">Backstage und Hospitality inklusive Maskenbereich</div>
+            <p>Separate Backstage- und Hospitality-Bereiche sorgen für professionelle Abläufe hinter den Kulissen und optimale Bedingungen für Speaker:innen, Gäst:innen und Teams.</p>
+          </div>
+        </div>
+        <div class="pbcard reveal d4">
+          <svg class="ic" viewBox="0 0 56.9 56.17" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.58,56.17c-.35,0-.64-.29-.64-.64v-2.16c0-1.28-1.04-2.32-2.32-2.32h-3.04c-1.28,0-2.32,1.04-2.32,2.32v2.16c0,.35-.29.64-.64.64s-.64-.29-.64-.64v-2.16c0-1.98,1.61-3.59,3.59-3.59h3.04c1.98,0,3.59,1.61,3.59,3.59v2.16c0,.35-.28.64-.64.64"/><path d="M56.27,56.17c-.35,0-.64-.29-.64-.64v-2.16c0-1.28-1.04-2.32-2.32-2.32h-3.04c-1.28,0-2.32,1.04-2.32,2.32v2.16c0,.35-.29.64-.64.64s-.64-.29-.64-.64v-2.16c0-1.98,1.61-3.59,3.59-3.59h3.04c1.98,0,3.59,1.61,3.59,3.59v2.16c0,.35-.28.64-.64.64"/><path d="M51.79,51.06c-.35,0-.64-.29-.64-.64V9.65c0-2.64-2.15-4.79-4.79-4.79H10.53c-2.64,0-4.79,2.15-4.79,4.79v40.77c0,.35-.29.64-.64.64s-.64-.29-.64-.64V9.65c0-3.34,2.72-6.06,6.06-6.06h35.84c3.34,0,6.06,2.72,6.06,6.06v40.77c0,.35-.28.64-.64.64"/><path d="M25.62,32.28h-13.36v-15.23c0-.35.29-.64.64-.64s.64.29.64.64v13.95h10.81v-13.95c0-.35.29-.64.64-.64s.64.29.64.64v15.23Z"/><path d="M24.98,21.57c-.26,0-.5-.16-.6-.42-.12-.33.05-.7.38-.82l4.04-1.49c.09-.03.14-.11.15-.15.02-.04.04-.12,0-.21l-2.48-5.45c-.11-.23-.29-.43-.52-.55l-7.02-3.71-7.02,3.71c-.23.12-.41.32-.52.55l-2.48,5.45c-.04.09-.02.17,0,.21.02.04.06.11.16.15l4.04,1.49c.33.12.5.49.38.82-.12.33-.49.5-.82.38l-4.04-1.49c-.4-.15-.72-.46-.89-.85-.17-.39-.16-.84.02-1.23l2.48-5.45c.22-.49.61-.9,1.08-1.15l7.62-4.03,7.62,4.03c.48.25.86.66,1.08,1.15l2.47,5.45c.18.39.18.84.02,1.23-.17.4-.49.71-.89.85l-4.05,1.49c-.07.02-.15.04-.22.04"/><path d="M18.94,13.25c-2.21,0-4-1.45-4-3.24,0-.35.29-.64.64-.64s.64.29.64.64c0,1.09,1.22,1.97,2.72,1.97s2.72-.88,2.72-1.97c0-.35.29-.64.64-.64s.64.29.64.64c0,1.79-1.8,3.24-4,3.24"/><path d="M47.74,15.13h-6.8c-.35,0-.64-.29-.64-.64s.29-.64.64-.64h6.8c.18,0,.24-.12.26-.19.02-.07.03-.2-.12-.3l-8.33-5.16-.03-.31c-.08-.81.53-1.8,1.53-3.13.4-.55.49-1.66.47-2.08,0-.79-.61-1.4-1.37-1.4s-1.37.61-1.37,1.37c0,.35-.29.64-.64.64s-.64-.29-.64-.64c0-1.46,1.19-2.65,2.64-2.65s2.64,1.19,2.64,2.65c.02.47-.06,1.95-.72,2.87-.69.92-1.11,1.58-1.24,1.98l7.71,4.78c.59.37.86,1.06.67,1.73-.19.67-.79,1.12-1.48,1.12"/><path d="M38.56,15.13h-5.85c-.7,0-1.29-.45-1.48-1.12-.19-.67.08-1.37.67-1.73l8.06-5c.3-.18.69-.09.88.21.19.3.09.69-.21.88l-8.06,5c-.15.09-.14.23-.11.3.02.07.08.19.26.19h5.85c.35,0,.64.29.64.64s-.28.64-.64.64"/><path d="M18.93,8.46c-.32,0-.6-.25-.64-.58-.08-.81.53-1.8,1.53-3.13.4-.55.49-1.66.47-2.08,0-.78-.61-1.4-1.37-1.4s-1.37.61-1.37,1.37c0,.35-.29.64-.64.64s-.64-.29-.64-.64C16.29,1.19,17.48,0,18.93,0s2.65,1.19,2.65,2.64c.02.47-.06,1.95-.72,2.87-.89,1.17-1.32,1.93-1.29,2.24.04.35-.22.66-.57.7-.02,0-.04,0-.06,0"/><path d="M38.12,15.13c-.35,0-.64-.29-.64-.64s.28-.64.64-.64c.18,0,.24-.12.26-.19.02-.07.03-.2-.12-.3l-8.33-5.16-.03-.31c-.08-.81.53-1.8,1.53-3.13.4-.55.5-1.66.48-2.08,0-.79-.62-1.4-1.37-1.4s-1.37.61-1.37,1.37c0,.35-.29.64-.64.64s-.64-.29-.64-.64c0-1.46,1.19-2.65,2.64-2.65s2.64,1.19,2.64,2.65c.02.47-.06,1.95-.72,2.87-.69.92-1.11,1.58-1.24,1.98l7.71,4.78c.59.37.86,1.06.67,1.73-.19.67-.79,1.12-1.48,1.12"/><path d="M24.98,11.94c-.22,0-.43-.11-.55-.31-.18-.3-.08-.69.22-.87l5.01-3.01c.3-.18.69-.08.87.22.18.3.08.69-.22.88l-5.01,3.01c-.1.06-.22.09-.33.09"/></svg>
+          <div class="txt">
+            <h3>Bestens versorgt</h3>
+            <div class="st">Catering und Garderobe integrierbar</div>
+            <p>Catering, Garderobe und ergänzende Services können nahtlos in dein Veranstaltungskonzept integriert werden.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 6 — TECHNIK INTRO ========================= -->
+    <section class="slide p-tech">
+      <div class="col-photo">
+        <div class="scrim"></div>
+        <span class="pill reveal d1">Technische Ausstattung</span>
+        <div class="txt">
+          <h2 class="reveal-left d2">Alles<br>im Blick.</h2>
+          <div class="kick reveal-left d3">Hinter den Kulissen.</div>
+        </div>
+      </div>
+      <div class="col-text">
+        <div class="eyebrow reveal d1">Produktion auf höchstem Niveau</div>
+        <h3 class="reveal d2">Vom ersten<br>Kamerabild bis zur<br><span class="red">finalen Regie.</span></h3>
+        <p class="body reveal d3">Mit modernster Broadcast-Technik, digitalen Deko-Elementen und einem State-of-the-Art-Lichthimmel bietet Studio 1 Live die Voraussetzungen für Produktionen auf höchstem Niveau – eine professionelle Umgebung für individuelle Kund:innenlösungen.</p>
+        <div class="chips reveal d4">
+          <div class="chip"><b>9</b> modulare Elemente</div>
+          <div class="chip"><b>100+</b> steuerbare Lichtquellen</div>
+          <div class="chip"><b>3</b> Regien</div>
+          <div class="chip">Events bis <b>500 m²</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 7 — WAS DEN UNTERSCHIED MACHT ========================= -->
+    <section class="slide p-diff">
+      <span class="pill reveal d1">Technische Ausstattung</span>
+      <h2 class="reveal d1">Was den Unterschied macht</h2>
+      <div class="table reveal d2">
+        <div class="pdrow">
+          <div class="lead"><div class="no">1.</div><div class="nm">Technik</div></div>
+          <div class="rt">
+            <div class="cap">Echte Produktionsinfrastruktur.</div>
+            <div class="cols">
+              <div class="grp"><div class="h">Studiodeko</div><ul><li>9 modulare Elemente (LED-Walls &amp; Lichtkörper)</li><li>individuell bespielbar (Branding, Content, Mood)</li></ul></div>
+              <div class="grp"><div class="h">Licht</div><ul><li>100+ steuerbare Lichtquellen</li><li>vollständig digital steuerbar (GrandMA3)</li></ul></div>
+              <div class="grp"><div class="h">Audio &amp; Regie</div><ul><li>professionelle Funkstrecken (Sennheiser)</li><li>Zugriff auf 3 Regien</li><li>Setup je nach Eventgröße</li></ul></div>
+            </div>
+          </div>
+        </div>
+        <div class="pdrow">
+          <div class="lead"><div class="no">2.</div><div class="nm">Flexibilität</div></div>
+          <div class="rt">
+            <div class="cap">Raum, der sich anpasst. Nicht umgekehrt.</div>
+            <div class="cols">
+              <div class="grp"><ul><li>variable Bühne &amp; Screens</li><li>flexible Bestuhlungen</li><li>individuelles Branding</li></ul></div>
+              <div class="grp"><ul><li>modular und frei kombinierbar</li><li>anpassbar für Events auf bis zu 500 m²</li></ul></div>
+            </div>
+          </div>
+        </div>
+        <div class="pdrow">
+          <div class="lead"><div class="no">3.</div><div class="nm">Atmosphäre</div></div>
+          <div class="rt">
+            <div class="cap">Gefühl statt Kulisse.</div>
+            <div class="cols">
+              <div class="grp"><ul><li>authentisches Broadcast-Ambiente</li><li>professionelle Produktionsumgebung</li></ul></div>
+              <div class="grp"><ul><li>Relevanz statt Show-Deko</li></ul></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 8 — SERVICE & LEISTUNGEN ========================= -->
+    <section class="slide p-service">
+      <div class="col-photo">
+        <div class="scrim"></div>
+        <span class="pill reveal d1">Service &amp; Leistungen</span>
+        <div class="txt">
+          <h2 class="reveal-left d2">Let’s make<br>it an event.</h2>
+        </div>
+      </div>
+      <div class="col-buy">
+        <span class="pill reveal d1">Preismodell</span>
+        <h3 class="reveal d1">Transparent und fair kalkuliert.</h3>
+        <div class="subline reveal d2">Keine Standardpakete. Keine versteckten Kosten.</div>
+        <div class="plans">
+          <div class="pplan reveal d2">
+            <h4>Basis</h4>
+            <div class="price">€ 2.500,-<small>Grundmiete pro Tag*</small></div>
+            <div class="incl">inklusive Studiofläche, Location &amp; Studioaufsicht</div>
+            <div class="divh"></div>
+            <div class="ideal">Ideal für</div>
+            <ul><li>Präsentationen</li><li>Presseevents</li><li>Live-Streaming</li><li>Panels, Talks &amp; Vodcasts</li></ul>
+          </div>
+          <div class="pplan reveal d3">
+            <h4>Zusatzservice</h4>
+            <ul>
+              <li>eigene Hospitality-Bereiche</li>
+              <li>Maskenmöglichkeiten für Speaker:innen</li>
+              <li>Foyer für Empfang &amp; Catering (bis 100 Personen)</li>
+              <li>klare Abläufe im Hintergrund</li>
+            </ul>
+            <div class="poa">Preis auf Anfrage.</div>
+          </div>
+        </div>
+        <p class="note reveal d4"><b>Du zahlst nur das, was dein Event wirklich braucht.</b> Zusätzliche Leistungen wie Technik und Personal werden bedarfsgerecht kalkuliert. Jede Anfrage wird vorab auf Verfügbarkeit und Machbarkeit geprüft. <span style="font-size:19px">* Auf-/Abbautage exklusive</span></p>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 9 — USE CASE 1 ========================= -->
+    <section class="slide p-uc1">
+      <div class="photo-col reveal-scale"></div>
+      <div class="text-col">
+        <span class="pill reveal d1">Deine Möglichkeiten</span>
+        <h2 class="reveal-left d2">Studio-Setup<br>nach Mass.</h2>
+        <div class="uc reveal-left d2">Use Case 1</div>
+        <p class="body reveal-left d3"><b>Von der ersten Idee bis zum Applaus:</b> Studio 1 Live schafft die Voraussetzungen für Veranstaltungen, die nachhaltig Eindruck hinterlassen – Inhalte werden sichtbar, Gäst:innen erleben ein außergewöhnliches Event.</p>
+        <div class="divider reveal d4"></div>
+        <h3 class="reveal-left d4">Der Raum folgt <span class="red">der Idee.</span></h3>
+        <p class="body reveal-left d5">Die flexible Planung von Bühne, Bestuhlung, Publikumsführung und Technik ermöglicht Setups, die exakt auf deine Anforderungen zugeschnitten sind. <b>Das Ergebnis:</b> optimale Sichtachsen, effiziente Abläufe und eine Inszenierung, die deine Inhalte in den Mittelpunkt stellt.</p>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 10 — USE CASE 2 ========================= -->
+    <section class="slide p-uc2">
+      <div class="text-col">
+        <span class="pill reveal d1">Deine Möglichkeiten</span>
+        <h2 class="reveal-left d2">Events, die<br>beeindrucken</h2>
+        <div class="uc reveal-left d3">Use Case 2</div>
+        <p class="body reveal-left d3">Ob Talkrunde, Produktpräsentation, Konferenz oder hybride Veranstaltung: Studio 1 Live bietet maximale Flexibilität bei der Raum- und Bühnenplanung. Die Kombination aus modularen Setups, professioneller Produktionsinfrastruktur und individueller Inszenierung schafft optimale Voraussetzungen für unvergessliche Events.</p>
+      </div>
+      <div class="photos">
+        <div class="im big reveal-scale d2"></div>
+        <div class="im a reveal-scale d3"></div>
+        <div class="im b reveal-scale d4"></div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 11 — KONTAKT ========================= -->
+    <section class="slide p-contact">
+      <div class="col-photo">
+        <div class="scrim"></div>
+        <h2 class="reveal-scale">Ready?</h2>
+      </div>
+      <div class="col-info">
+        <span class="pill reveal d1">Kontakt</span>
+        <h3 class="reveal d1">Dein Event.</h3>
+        <div class="red-sub reveal d2">Unser Studio. Und Action!</div>
+        <p class="body reveal d3"><b style="color:var(--ink)">Du hast eine Idee?</b> Wir sagen dir, ob und wie sie bei Studio 1 Live funktioniert, und entwickeln gemeinsam mit dir die passende Umsetzung. Anschließend erstellen wir ein maßgeschneidertes Angebot für dich. Wir freuen uns auf deine Anfrage.</p>
+        <div class="contact-card reveal d4">
+          <div class="h">Deine Ansprechpartner:innen</div>
+          <div class="people">
+            <div>
+              <div class="nm">Sabine Timmel</div>
+              <div class="nm-row"><svg viewBox="0 0 14.27 16.99" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.01,10.73c1.63,2.19,3.94,4.14,6.51,5.13,1.3.5,1.63-.2,2.21-1.12.28-.45.46-.74.51-.85.04-.08.02-.17-.06-.22l-2.86-1.92s-.09-.03-.14,0l-1.55.9c-.2.12-.45.12-.66.01-1.02-.54-2.18-2.01-2.78-2.81-.59-.8-1.66-2.33-1.89-3.46-.05-.23.03-.47.2-.63l1.31-1.23s.05-.09.03-.13l-1.02-3.29c-.03-.08-.11-.14-.2-.12-.13.02-.45.11-.96.25-1.05.29-1.81.41-1.7,1.8.2,2.75,1.41,5.52,3.03,7.71M4.45,6.09c-.1.08-.14.23-.08.35.89,1.92,2.09,3.61,3.58,5.07.13.12.32.15.47.06l1.32-.76c.29-.17.64-.16.93,0,.38.23,1.24.79,2.58,1.69.76.51,1.29.91.88,1.81-.31.67-.67,1.28-1.07,1.81-1.06,1.4-2.7.81-4,.12C4.58,13.91,1.6,10.01.29,5.14.03,4.19-.06,3.23.04,2.26.19.62,2.4.19,3.73.01c.5-.07.83.14,1,.63.13.38.5,1.62,1.12,3.73.09.31-.02.63-.27.83l-1.14.9Z"/></svg><span class="ph">+43 664 808 99 88 75</span></div>
+            </div>
+            <div>
+              <div class="nm">Martin Hopitzan</div>
+              <div class="nm-row"><svg viewBox="0 0 14.27 16.99" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4.01,10.73c1.63,2.19,3.94,4.14,6.51,5.13,1.3.5,1.63-.2,2.21-1.12.28-.45.46-.74.51-.85.04-.08.02-.17-.06-.22l-2.86-1.92s-.09-.03-.14,0l-1.55.9c-.2.12-.45.12-.66.01-1.02-.54-2.18-2.01-2.78-2.81-.59-.8-1.66-2.33-1.89-3.46-.05-.23.03-.47.2-.63l1.31-1.23s.05-.09.03-.13l-1.02-3.29c-.03-.08-.11-.14-.2-.12-.13.02-.45.11-.96.25-1.05.29-1.81.41-1.7,1.8.2,2.75,1.41,5.52,3.03,7.71M4.45,6.09c-.1.08-.14.23-.08.35.89,1.92,2.09,3.61,3.58,5.07.13.12.32.15.47.06l1.32-.76c.29-.17.64-.16.93,0,.38.23,1.24.79,2.58,1.69.76.51,1.29.91.88,1.81-.31.67-.67,1.28-1.07,1.81-1.06,1.4-2.7.81-4,.12C4.58,13.91,1.6,10.01.29,5.14.03,4.19-.06,3.23.04,2.26.19.62,2.4.19,3.73.01c.5-.07.83.14,1,.63.13.38.5,1.62,1.12,3.73.09.31-.02.63-.27.83l-1.14.9Z"/></svg><span class="ph">+43 664 808 99 89 52</span></div>
+            </div>
+            <div class="mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>studio1@prosiebensat1puls4.com</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= SLIDE 12 — CLOSING ========================= -->
+    <section class="slide p-end">
+      <img class="logo-big reveal-fade d1" src="assets/studio1live_logo.svg" alt="Studio 1 Live">
+      <img class="wall-strip reveal-scale d2" src="assets/logo-1-wall.jpg" alt="">
+      <div class="wall-strip-scrim"></div>
+      <div class="menu">
+        <div class="reveal d2">BROADCAST</div>
+        <div class="reveal d3">TALKS</div>
+        <div class="reveal d2">STREAMING</div>
+        <div class="reveal d3">KEYNOTES</div>
+        <div class="reveal d3">EVENTS</div>
+        <div class="reveal d4">HYBRID</div>
+      </div>
+      <div class="addr">
+        <div class="co reveal d5">ProSiebenSat.1 Puls 4 GmbH</div>
+        <div class="ln reveal d6">Media Quarter Marx 3.1 • Maria Jacobi Gasse 1 • 1030 Wien</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Deck chrome -->
+<div id="hint">↑ ↓ oder Leertaste zum Blättern</div>
+
+<!-- Inline editing -->
+<div class="edit-hotzone" id="hotzone"></div>
+<button class="edit-toggle" id="editToggle" title="Bearbeiten (E)">✏️</button>
+<div id="editbar"><span>Bearbeitungsmodus – Text anklicken · Strg+S speichert</span><button id="saveBtn">Speichern</button></div>
+
+<script>
+/* ============================================================
+   SLIDE PRESENTATION CONTROLLER
+   Fixed 1080×1920 portrait stage, uniformly scaled to viewport.
+   ============================================================ */
+class SlidePresentation{
+    constructor(){
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.stage  = document.getElementById('deckStage');
+        this.i = 0;
+        this.progress = document.getElementById('progress');
+        this.setupScale();
+        this.setupKeys();
+        this.setupTouch();
+        this.setupWheel();
+        this.show(0);
+        setTimeout(()=>{ document.getElementById('hint').style.opacity = '0'; }, 5000);
+    }
+    setupScale(){
+        const scale = () => {
+            const f = Math.min(window.innerWidth/1080, window.innerHeight/1920);
+            // slight overscan + integer translate to kill sub-pixel edge hairlines
+            const fs = f * 1.004;
+            const x = Math.round((window.innerWidth  - 1080*fs)/2);
+            const y = Math.round((window.innerHeight - 1920*fs)/2);
+            this.stage.style.transform = `translate(${x}px, ${y}px) scale(${fs})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+    }
+    show(n){
+        this.i = Math.max(0, Math.min(n, this.slides.length-1));
+        this.slides.forEach((s,idx)=>{
+            s.classList.toggle('active', idx===this.i);
+            s.classList.toggle('visible', idx===this.i);
+        });
+        this.progress.style.width = ((this.i+1)/this.slides.length*100)+'%';
+    }
+    next(){ this.show(this.i+1); }
+    prev(){ this.show(this.i-1); }
+    setupKeys(){
+        document.addEventListener('keydown', e=>{
+            if(e.target && e.target.getAttribute && e.target.getAttribute('contenteditable')==='true') return;
+            if(['ArrowRight','ArrowDown',' ','PageDown'].includes(e.key)){ e.preventDefault(); this.next(); }
+            else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); this.prev(); }
+            else if(e.key==='Home'){ this.show(0); }
+            else if(e.key==='End'){ this.show(this.slides.length-1); }
+        });
+    }
+    setupTouch(){
+        let x0=null, y0=null;
+        const el = document.querySelector('.deck-viewport');
+        el.addEventListener('touchstart', e=>{ x0=e.touches[0].clientX; y0=e.touches[0].clientY; }, {passive:true});
+        el.addEventListener('touchend', e=>{
+            if(x0===null) return;
+            const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+            // portrait: vertical swipes drive navigation
+            if(Math.abs(dy)>50 && Math.abs(dy)>Math.abs(dx)){ dy<0 ? this.next() : this.prev(); }
+            else if(Math.abs(dx)>50){ dx<0 ? this.next() : this.prev(); }
+            x0=y0=null;
+        }, {passive:true});
+    }
+    setupWheel(){
+        let lock=false;
+        window.addEventListener('wheel', e=>{
+            if(lock) return;
+            if(Math.abs(e.deltaY)<24) return;
+            lock=true; e.deltaY>0 ? this.next() : this.prev();
+            setTimeout(()=>lock=false, 700);
+        }, {passive:true});
+    }
+}
+const deck = new SlidePresentation();
+
+/* ============================================================
+   SLIDE 4 (p-facts) — count-up animation for the two big numbers.
+   ============================================================ */
+(function(){
+    const facts = document.querySelector('.p-facts');
+    if(!facts) return;
+    const cvals = facts.querySelectorAll('.cval');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function animate(el){
+        const to = parseInt(el.dataset.to, 10);
+        el.textContent = to;
+        el.style.width = el.offsetWidth + 'px';   // fixed final width -> unit stays put
+        if(reduce){ return; }
+        el.textContent = '0';
+        const dur = 1400, t0 = performance.now();
+        (function tick(now){
+            const p = Math.min((now - t0)/dur, 1);
+            const e = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(e * to);
+            if(p < 1) requestAnimationFrame(tick);
+            else el.textContent = to;
+        })(t0);
+    }
+    let played = false;
+    const run = ()=>{
+        if(facts.classList.contains('active')){
+            if(!played){ played = true; cvals.forEach(animate); }
+        }else{ played = false; cvals.forEach(c => c.textContent = '0'); }
+    };
+    new MutationObserver(run).observe(facts, {attributes:true, attributeFilter:['class']});
+    run();
+})();
+
+/* ============================================================
+   INLINE TEXT EDITING (post-draft affordance)
+   ============================================================ */
+const editor = {
+    isActive:false,
+    els:null,
+    sel:'.slide h1,.slide h2,.slide h3,.slide h4,.slide p,.slide .t,.slide .fl,.slide .lbl,.slide .cap,.slide li,.slide .nm,.slide .ph,.slide .st,.slide .incl,.slide .kick,.slide .co,.slide .ln,.slide .uc,.slide .red-sub,.slide .eyebrow,.slide .menu div,.slide .h',
+    toggleEditMode(){
+        this.isActive = !this.isActive;
+        const btn = document.getElementById('editToggle');
+        const bar = document.getElementById('editbar');
+        btn.classList.toggle('active', this.isActive);
+        bar.classList.toggle('show', this.isActive);
+        if(!this.els){ this.els = document.querySelectorAll(this.sel); }
+        this.els.forEach(el=> el.setAttribute('contenteditable', this.isActive));
+        if(this.isActive) this.restore();
+    },
+    save(){
+        const data = {};
+        this.els.forEach((el,i)=> data[i]=el.innerHTML);
+        localStorage.setItem('s1l-portrait-edits', JSON.stringify(data));
+        const bar = document.getElementById('editbar');
+        const old = bar.firstChild.textContent;
+        bar.firstChild.textContent = '✓ Gespeichert';
+        setTimeout(()=> bar.firstChild.textContent = old, 1500);
+    },
+    restore(){
+        const raw = localStorage.getItem('s1l-portrait-edits');
+        if(!raw) return;
+        try{ const d = JSON.parse(raw); this.els.forEach((el,i)=>{ if(d[i]!=null) el.innerHTML=d[i]; }); }catch(e){}
+    }
+};
+window.addEventListener('load', ()=>{
+    editor.els = document.querySelectorAll(editor.sel);
+    editor.restore();
+});
+document.getElementById('editToggle').addEventListener('click', ()=> editor.toggleEditMode());
+document.getElementById('saveBtn').addEventListener('click', ()=> editor.save());
+const hotzone = document.getElementById('hotzone');
+const editToggle = document.getElementById('editToggle');
+let hideTimeout=null;
+hotzone.addEventListener('mouseenter', ()=>{ clearTimeout(hideTimeout); editToggle.classList.add('show'); });
+hotzone.addEventListener('mouseleave', ()=>{ hideTimeout=setTimeout(()=>{ if(!editor.isActive) editToggle.classList.remove('show'); },400); });
+editToggle.addEventListener('mouseenter', ()=> clearTimeout(hideTimeout));
+editToggle.addEventListener('mouseleave', ()=>{ hideTimeout=setTimeout(()=>{ if(!editor.isActive) editToggle.classList.remove('show'); },400); });
+hotzone.addEventListener('click', ()=> editor.toggleEditMode());
+document.addEventListener('keydown', e=>{
+    if((e.key==='e'||e.key==='E') && e.target.getAttribute('contenteditable')!=='true'){ editor.toggleEditMode(); }
+    if((e.ctrlKey||e.metaKey) && e.key==='s' && editor.isActive){ e.preventDefault(); editor.save(); }
+});
+</script>
+</body>
+</html>
